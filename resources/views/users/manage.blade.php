@@ -1,4 +1,4 @@
-@extends('layout')
+{{-- @extends('layout')
 @section('content')
 
 <x-card class="p-10" >
@@ -82,4 +82,4 @@
         </tbody>
     </table>
 </x-card>
-@endsection
+@endsection --}}
