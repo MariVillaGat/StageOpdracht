@@ -7,8 +7,29 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    //Show all products admin
+    public function getProducts()
+    {
+        $products = Product::paginate(10);
 
-    //Show all products
+        return view('admin.products', compact('products'));
+    }
+    //Delete products admin
+    public function destroy(Product $product)
+    {
+        $product->delete();
+        return redirect()->route('admin.products')->with('success', 'Product deleted successfully');
+    }
+    
+    // Edit and update admin
+    public function edit(Product $product)
+    {
+        return view('admin.edit-product', ['product' => $product]);
+    }
+
+  
+
+      //Show all products
     public function index(){
         return view('products.index', [
             'products' => Product::latest()->filter(request(['search']))->paginate(4)
@@ -54,18 +75,13 @@ class ProductController extends Controller
 
     }
 
-    //Show Edit Form
-    public function edit(Product $product){
-        return view('products.edit',['product'=> $product]);
-    }
-
-   //Update product data
+   // Update product data
     public function update(Request $request, Product $product){
 
     // Make sure logged in user is owner
-        if($product->user_id != auth()->id()) {
-        abort(403, 'Unauthorized Action');
-        }
+        // if($product->user_id != auth()->id()) {
+        // abort(403, 'Unauthorized Action');
+        // }
 
 
     $formFields = $request->validate([
@@ -82,9 +98,10 @@ class ProductController extends Controller
 
     $product->update($formFields);
 
-    return back()->with('message', 'Product updated successfully!');
+    return redirect('/admin/products')->with('message', 'Product updated successfully!');
 
 }
+
 
     //Delete product
     public function delete(Product $product){
@@ -92,6 +109,7 @@ class ProductController extends Controller
     return redirect('/')->with('message', 'Product deleted successfully');
 
     }
+   
 
     // //Manage products
     // public function manage(){

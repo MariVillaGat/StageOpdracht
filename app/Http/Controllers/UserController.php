@@ -66,6 +66,41 @@ class UserController extends Controller
     }
 
 
+    // Administrat
+    public function index()
+    {
+        $users = User::all();
+        return view('admin.users', compact('users'));
+    }
 
+     // Show edit form for user
+   public function edit(User $user)
+   {
+       return view('admin.edit-user', ['user' => $user]);
+   }
 
+   // Update user details
+   public function update(User $user, Request $request)
+   {
+       $formFields = $request->validate([
+           'name'=> ['required', 'min:3'],
+           'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+           'password' => 'nullable|confirmed|min:6'
+       ]);
+
+       if(isset($formFields['password'])) {
+           $formFields['password'] = bcrypt($formFields['password']);
+       } else {
+           unset($formFields['password']);
+       }
+
+       $user->update($formFields);
+
+       return redirect('/admin/users')->with('message', 'User details updated successfully!');
+   }
 }
+
+
+
+
+

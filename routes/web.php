@@ -2,8 +2,10 @@
 
 
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 
 
@@ -17,6 +19,35 @@ use App\Http\Controllers\ProductController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function(){
+    //Admin routes
+    Route::get('/products', [ProductController::class, 'getProducts'])->name('admin.products');
+    // Delete products
+    // Route::delete('/products/{product}', [ProductController::class, 'delete'])->middleware('auth');
+     Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+    //Edit and update products
+     Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+     Route::put('/admin/products/{product}', [ProductController::class, 'update'])->name('products.update');
+
+     Route::get('/admin', [AdminController::class, 'index']);
+
+     //Users admin
+
+     Route::get('/users', [UserController::class, 'index'])->name('admin.users');
+
+    //Show edit users form
+     Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+
+     Route::put('/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+
+});
+
+
+
+
+
+
 
 //All products
 Route::get('/', [ProductController::class, 'index']);
@@ -61,3 +92,9 @@ Route::get('/login',[UserController::class, 'login'])->name('login')->middleware
 
 //Login user
 Route::post('/users/authenticate',[UserController::class,'authenticate']);
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
