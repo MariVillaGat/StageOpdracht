@@ -13,23 +13,10 @@
     </thead>
     <tbody>
       <tr>
-        <th scope="row">1</th>
+        <th scope="row">{{ $user->id }} </th>
         <td></td>
-        <td></td>
-        
+        <td>  {{ $user->points }} </td>
       </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td></td>
-        <td></td>
-       
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2"></td>
-        
-      </tr>
-
       <a
       href="/"
       class="absolute top-1/3 right-10 bg-black rounded text-white py-2 px-5"

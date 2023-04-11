@@ -1,11 +1,14 @@
 <?php
 
 
+
+use App\Models\User;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PointsController;
 use App\Http\Controllers\ProductController;
 
 
@@ -43,12 +46,6 @@ Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function(){
 
 });
 
-
-
-
-
-
-
 //All products
 Route::get('/', [ProductController::class, 'index']);
 
@@ -71,8 +68,12 @@ Route::get('/', [ProductController::class, 'index']);
 // Route::get('/products/manage', [ProductController::class, 'manage'])->middleware('auth');
 
 //Route to user points
-Route::get('/users/points', function(){
-    return view('users/points');
+Route::get('/users/points', function() {
+    if(Auth::check()) {
+        $user = Auth::user();
+        return view('users.points', compact('user'));
+    }
+    return redirect('/login');
 });
 
 //Single product
