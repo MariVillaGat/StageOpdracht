@@ -14,7 +14,7 @@
     <tbody>
       <tr>
         <th scope="row">{{ $user->id }} </th>
-        <td></td>
+        <td>{{$user->months}}</td>
         <td>  {{ $user->points }} </td>
       </tr>
       <a
