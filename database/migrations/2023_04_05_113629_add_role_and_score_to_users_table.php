@@ -15,7 +15,7 @@ class AddRoleAndScoreToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->integer('role')->default('0');
-            $table->integer('score')->default(0);
+            $table->integer('points')->default(0);
         });
     }
 
@@ -27,7 +27,7 @@ class AddRoleAndScoreToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['role', 'score']);
+            $table->dropColumn(['role', 'points']);
         });
     }
 }
