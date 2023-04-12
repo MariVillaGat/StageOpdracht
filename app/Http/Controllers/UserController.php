@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 
 class UserController extends Controller
@@ -20,6 +21,7 @@ class UserController extends Controller
         'name'=> ['required', 'min:3'],
         'email' => ['required', 'email', Rule::unique('users','email')],
         'password' => 'required|confirmed|min:6'
+        
     ]);
 
     //Hash password
@@ -102,12 +104,18 @@ class UserController extends Controller
 
    // Update user details
    public function update(User $user, Request $request)
-   {
-       $formFields = $request->validate([
-           'name'=> ['required', 'min:3'],
-           'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
-           'password' => 'nullable|confirmed|min:6'
-       ]);
+{
+    $formFields = $request->validate([
+        'name'=> ['required', 'min:3'],
+        'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+        'password' => 'nullable|confirmed|min:6',
+        'points' => ['nullable', 'integer'] // make points field optional and of integer type
+    ]);
+    
+    // Check if the authenticated user is an admin before updating the points field
+    if (Auth::user()->role === 1) { 
+        $user->points = $formFields['points'];
+    }
 
        if(isset($formFields['password'])) {
            $formFields['password'] = bcrypt($formFields['password']);
