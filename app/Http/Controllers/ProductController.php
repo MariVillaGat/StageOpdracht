@@ -117,8 +117,10 @@ class ProductController extends Controller
     }
    
 
-    // //Manage products
-    // public function manage(){
-    //     return view('products.manage',['products'=> auth ()->user()->products()->get()]);
-    // }
+    // Bay products
+    public function buy($product) {
+        // logic to handle the 'Buy' button click
+        return view('/products/buy');
+    }
+    
 }
