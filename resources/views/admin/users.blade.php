@@ -11,8 +11,10 @@
                 <tr>
                     <th>ID</th>
                     <th>Employee name</th>
-                    <th>e-mail</th>
-                    <th>Points of employee</th>
+                    <th>E-mail</th>
+                    <th>Points</th>
+                    <th>Actions</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
