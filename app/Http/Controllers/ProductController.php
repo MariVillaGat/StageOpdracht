@@ -118,9 +118,9 @@ class ProductController extends Controller
    
 
     // Bay products
-    public function bay($product) {
-        // logic to handle the 'Bay' button click
-        return view('/products/bay');
+    public function buy($product) {
+        // logic to handle the 'Buy' button click
+        return view('/products/buy');
     }
     
 }

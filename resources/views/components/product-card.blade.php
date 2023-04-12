@@ -13,10 +13,10 @@
                 <a href="/products/{{$product->id}}">{{$product->title}}</a>
             </h3>
             <x-product-tags :tagsCsv="$product->tags"/>
-                <form action="{{ route('products.bay', $product->id) }}" method="post">
+                <form action="{{ route('products.buy', $product->id) }}" method="post">
                     @csrf
                     <button type="submit" class="h-10 w-20 text-white rounded-lg bg-red-500 hover:bg-red-600 absolute mt-6">
-                        Bay
+                        To buy
                     </button>
                 </form>
 
