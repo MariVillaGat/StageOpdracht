@@ -78,13 +78,6 @@
 >
     <p class="ml-2">Copyright &copy; 2023, All Rights reserved</p>
 
-    {{-- Add products -> admin
-        
-        <a
-        href="/products/create"
-        class="absolute top-1/3 right-10 bg-black text-white py-2 px-5"
-        >New product</a
-    > --}}
 </footer>
 <x-flash-message/>
 

@@ -45,20 +45,6 @@
 
                         </div>
 
-                        {{-- <div class="mb-6">
-                            <label
-                                for="website"
-                                class="inline-block text-lg mb-2"
-                            >
-                                Website/Application URL
-                            </label>
-                            <input
-                                type="text"
-                                class="border border-gray-200 rounded p-2 w-full"
-                                name="website"
-                            />
-                        </div> --}}
-
                         <div class="mb-6">
                             <label for="tags" class="inline-block text-lg mb-2">
                                 Tags (Comma Separated)
