@@ -83,9 +83,6 @@
     <p class="ml-2">Copyright &copy; 2023, All Rights reserved</p>
 
    
-        
-      
-    >
 </footer>
 <x-flash-message/>
 
