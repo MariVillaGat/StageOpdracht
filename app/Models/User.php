@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -46,4 +47,13 @@ class User extends Authenticatable
     // public function products(){
     //     return $this->hasMany(Product::class, 'user_id');
     // }
+
+    public function scopeFilter($query, array $filters)
+{
+    if ($filters['search'] ?? false) {
+        $query->where('name', 'like', '%' . request('search') . '%')
+              ->orWhere('email', 'like', '%' . request('search') . '%');
+    }
+}
+
 }

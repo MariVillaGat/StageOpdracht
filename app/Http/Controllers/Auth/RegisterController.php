@@ -64,10 +64,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    
+        // Check if the role is set to '1' for admin
+        if (isset($data['role']) && $data['role'] === '1') {
+            $user->attachRole('admin');
+        } else {
+            // If no role was submitted or role is not set to '1', assign the default role
+            $user->attachRole('user');
+        }
+    
+        return $user;
     }
 }

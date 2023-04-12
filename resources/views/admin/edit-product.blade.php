@@ -1,11 +1,15 @@
-@extends('layout')
+@extends('admin.layout-admin')
+
 
 @section('content')
     @include('partials._hero')
     @include('partials._search')
 
-    <div class="lg:grid lg:grid-cols-2 gap-4 space-y-4 md:space-y-0 mx-4">
-        <div class="bg-white rounded-lg overflow-hidden shadow-md">
+    <x-card class="p-10 max-w-lg mx-auto mt-24">
+        <header class="text-center">
+          <h2 class="text-2xl font-bold uppercase mb-1">Edit Gig</h2>
+          <p class="mb-4">Edit: {{$product->title}}</p>
+        </header>
             <form method="POST" action="/admin/products/{{$product->id}}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -108,8 +112,5 @@
                     <a href="/admin/products" class="text-black ml-4"> Back </a>
                 </div>
             </form>
-
-            
-        </div>
-    </div>
+        </x-card>
 @endsection

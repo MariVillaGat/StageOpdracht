@@ -1,39 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('admin.layout-admin')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    @yield('styles')
-</head>
+@section('content')
+	@include('partials._hero')
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Admin Panel</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.users') }}">Users</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.products') }}">Products</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+	<div class="flex m-10 mt-5">
+		<div class="w-3/4 md:w-1/2 lg:w-2/5">
+			<h1 class="text-3xl font-bold mb-4">Welcome to the Admin Dashboard</h1>
+			<p class="text-lg mb-4">You have access to the following features:</p>
+			<ul class="list-disc list-inside">
+				<li class="text-lg">View, update and delete user accounts</li>
+				<li class="text-lg">Create, view, update and delete product listings</li>
+				<li class="text-lg">View and analyze sales reports</li>
+			</ul>
+		</div>
+	</div>
+@endsection
 
-    <div class="container mt-4">
-        @yield('content')
-    </div>
 
-    <script src="{{ asset('js/app.js') }}"></script>
-    @yield('scripts')
-</body>
 
-</html>
+
+
