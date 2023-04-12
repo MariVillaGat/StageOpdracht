@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('admin.layout-admin')
 
 @section('content')
     <div class="container">
@@ -39,6 +39,20 @@
                                     @enderror
                                 </div>
                             </div>
+                            
+                            {{-- <div class="form-group row m-2">
+                                <label for="points" class="col-md-4 col-form-label text-md-right">{{ __('Points') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="points" type="" class="form-control  @error('points') is-invalid @enderror" name="points" value="{{ $user->points}}" required autocomplete="points">
+
+                                    @error('points')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div> --}}
 
                             <div class="form-group row m-2">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
@@ -70,6 +84,7 @@
                                 </div>
                             </div>
                         </form>
+                        <a href="/admin/users" class="inline-block text-black ml-4 mb-4"><i class="fa-solid fa-arrow-left"></i> Back </a>
                     </div>
                 </div>
             </div>

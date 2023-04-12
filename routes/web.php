@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PointsController;
@@ -24,25 +25,34 @@ use App\Http\Controllers\ProductController;
 */
 Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function(){
     //Admin routes
+    Route::get('/admin', [HomeController::class, 'adminHome'])->name('admin.home');
+
     Route::get('/products', [ProductController::class, 'getProducts'])->name('admin.products');
     // Delete products
-    // Route::delete('/products/{product}', [ProductController::class, 'delete'])->middleware('auth');
+    
      Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
     //Edit and update products
      Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-     Route::put('/admin/products/{product}', [ProductController::class, 'update'])->name('products.update');
+     Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
 
      Route::get('/admin', [AdminController::class, 'index']);
+   
+    // Show create Form
+    Route::get('/products/create', [ProductController::class, 'create']);
+    // Store Product Data
+    Route::post('/products-store', [ProductController::class, 'store']);
+    //Show single Product
+    Route::get('/products/{product}', [ProductController::class, 'showA']);
 
      //Users admin
 
      Route::get('/users', [UserController::class, 'index'])->name('admin.users');
 
     //Show edit users form
-     Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
-
-     Route::put('/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
-     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+    Route::get('/users/{id}', [UserController::class, 'show'])->name('admin.users.show');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 
 });
 
@@ -98,4 +108,5 @@ Route::post('/users/authenticate',[UserController::class,'authenticate']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home');

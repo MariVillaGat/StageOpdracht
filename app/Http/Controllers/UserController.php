@@ -50,27 +50,48 @@ class UserController extends Controller
         return view('users.login');
     }
 
-    //Authenticate user
-    public function authenticate(Request $request){
-        $formFields = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => 'required'
-        ]);
-
-        if(auth()->attempt($formFields)){
-            $request->session()->regenerate();
-
-            return redirect('/')->with('message', 'Your now logged in!');
-        }
-        return back()->withErrors(['email'=> 'Invalid credentials'])->onlyInput('email');
-    }
+     // Authenticate user
+     public function authenticate(Request $request)
+     {
+         $formFields = $request->validate([
+             'email' => ['required', 'email'],
+             'password' => 'required'
+         ]);
+ 
+         if (auth()->attempt($formFields)) {
+             $request->session()->regenerate();
+ 
+             // Check user's role
+             if (auth()->user()->role == 1) {
+                 return redirect('/admin/admin')->with('message', 'You are logged in as Admin!');
+             }
+ 
+             return redirect('/')->with('message', 'You are now logged in!');
+         }
+ 
+         return back()->withErrors(['email' => 'Invalid credentials'])->onlyInput('email');
+     }
 
 
     // Administrat
-    public function index()
+    //show all users
+    public function index(Request $request)
     {
-        $users = User::all();
+        $search = $request->input('search');
+        $users = User::when($search, function ($query, $search) {
+            return $query->where('name', 'LIKE', '%'.$search.'%')
+                         ->orWhere('email', 'LIKE', '%'.$search.'%');
+        })->get();
+    
         return view('admin.users', compact('users'));
+    }
+
+    
+   //Show single user
+   public function show($id)
+    {
+        $user = User::find($id);
+        return view('admin.user', ['user' => $user]);
     }
 
      // Show edit form for user
@@ -98,6 +119,12 @@ class UserController extends Controller
 
        return redirect('/admin/users')->with('message', 'User details updated successfully!');
    }
+
+   public function destroy(User $user) {
+    $user->delete();
+    return redirect('/admin/users')->with('message', 'User deleted successfully!');
+   }
+
 }
 
 

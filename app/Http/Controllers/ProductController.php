@@ -36,22 +36,15 @@ class ProductController extends Controller
         ]);
 
     }
-    
-    //Show single product
-    public function show(Product $product){
-        return view('products.show',[
-            'product' => $product
-        ]);
-
-    }
+  
 
     //Show create from
     public function create(){
-        return view('products.create');
+        return view('admin.product-create');
     }
 
     //Store product data
-    public function store(Request $request){
+    public function store(Request $request){          
         $formFields = $request->validate([
             'title'=> 'required',
             'price' => 'required',
@@ -63,15 +56,28 @@ class ProductController extends Controller
             $formFields['logo']= $request->file('logo')->store('logos','public');
         }
 
-        // Set the user ID for the new product
-        $formFields['user_id'] = auth()->id();
+        // // Set the user ID for the new product
+        //  $formFields['user_id'] = auth()->id();
 
 
-        Product::create($formFields);
+        Product::create($formFields); 
 
+        return redirect('/admin/products')->with('message', 'Product added successfully!');
 
+    }
+      
+    //Show single product
+    public function show(Product $product){
+        return view('products.show',[
+            'product' => $product
+        ]);
 
-        return redirect('/')->with('message', 'Product added successfully!');
+    }
+      //Show single product
+      public function showA(Product $product){
+        return view('admin.show',[
+            'product' => $product
+        ]);
 
     }
 
