@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('user_id')->nullable();
+
             $table->string('title');
             $table->string('logo')->nullable();
             $table->string('tags');
