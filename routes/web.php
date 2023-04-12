@@ -104,6 +104,9 @@ Route::get('/login',[UserController::class, 'login'])->name('login')->middleware
 //Login user
 Route::post('/users/authenticate',[UserController::class,'authenticate']);
 
+// Bay products
+
+Route::post('/products/{product}/bay', [ProductController::class, 'bay'])->name('products.bay')->middleware('auth');
 
 
 Auth::routes();
