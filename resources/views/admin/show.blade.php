@@ -13,8 +13,6 @@
 
                         <h3 class="text-2xl mb-2"> {{$product->title}} </h3>
 
-                        {{-- Name company-->dont need it
-                        <div class="text-xl font-bold mb-4">Acme Corp</div> --}}
 
                         <x-product-tags :tagsCsv="$product->tags"/>
 

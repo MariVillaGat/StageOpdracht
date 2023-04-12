@@ -45,14 +45,14 @@
 
                 </li>
                 <li>
-                    <a href="/admin/users" class="hover:text-laravel font-bold"
-                        ><i class="fa-sharp fa-solid fa-users"></i>Users
+                    <a href="/admin/users" class="hover:text-laravel"
+                        ><i class="fa-sharp fa-solid fa-users"></i> Users
                         </a
                     >
                 </li> 
                 <li>
-                    <a href="/admin/products" class="hover:text-laravel font-bold"
-                        ><i class="fa-solid fa-store"></i>Products
+                    <a href="/admin/products" class="hover:text-laravel"
+                        ><i class="fa-solid fa-store"></i> Products
                         </a
                     >
                 </li>
@@ -60,7 +60,7 @@
                 <form class="inline" method="POST" action="/logout">
                   @csrf 
                   <button type="submit">
-                <i class="fa-solid fa-door-closed"></i>Logout</button> 
+                <i class="fa-solid fa-door-closed"></i> Logout</button> 
                 </form>
                 </li>
                 @else
