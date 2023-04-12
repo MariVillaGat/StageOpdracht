@@ -3,17 +3,18 @@
 @section('content')
 @include('partials._hero2')
 @include('partials._search-user')
+
 <a href="/admin/admin" class="inline-block text-black ml-4 mb-4"><i class="fa-solid fa-arrow-left"></i> Back </a>
-<div class="container d-flex justify-content-center text-center align-items-center vh-500">
-    <div>
-        
-        <table class="table">
+
+<table class="table">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Employee name</th>
-                    <th>e-mail</th>
-                    <th>Points of employee</th>
+                    <th>E-mail</th>
+                    <th>Points</th>
+                    <th>Actions</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -43,9 +44,7 @@
                     </tr>
                 @endforeach
             </tbody>
-        </table>
+</table>
 
-    </div>
-</div>
 @endsection
 
