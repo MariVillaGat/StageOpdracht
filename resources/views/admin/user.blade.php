@@ -20,7 +20,7 @@
 
                           <div>
                             <h3 class="text-3xl font-bold mb-4">
-                                Score: {{$user->score }}
+                                Score: {{$user->points }}
                             </h3>                                                         
                         </div>
                         </div>
