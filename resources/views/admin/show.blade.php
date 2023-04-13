@@ -12,6 +12,9 @@
                         />
 
                         <h3 class="text-2xl mb-2"> {{$product->title}} </h3>
+                        <p class="text-2xl h-10 w-40 text-white rounded-lg bg-red-500 hover:bg-red-600 m-3 ">
+                            Price:{{$product->price}}
+                        </p>
 
 
                         <x-product-tags :tagsCsv="$product->tags"/>
