@@ -34,7 +34,7 @@
 
     <body class="mb-48">
         <nav class="flex justify-between items-center mb-4">
-            <a href="/"
+            <a href="/admin/admin"
                 ><img class="w-60 pt-2.5 pl-2.5" src="{{asset('images/logo.png')}}" alt="" class="logo"
             /></a>
             <ul class="flex space-x-6 mr-6 text-lg">
